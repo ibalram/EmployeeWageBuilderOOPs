@@ -9,7 +9,7 @@ public class EmpWageBuilder {
 	static int NUM_OF_WORKING_DAYS = 20;
 	static int MAX_HRS = 10;
 
-	public static int computeEmpWage() {
+	public static int computeEmpWage(String company, int EMP_RATE_PER_HOUR, int NUM_OF_WORKING_DAYS, int MAX_HRS) {
 		Random rand = new Random();
 		int totalEmpHrs = 0;
 		int dayCount = 0, empHrs = 0;
@@ -28,13 +28,14 @@ public class EmpWageBuilder {
 			System.out.println("Day#: " + dayCount + " Emp Hr: " + empHrs);
 		}
 		int totalEmpWage = totalEmpHrs * EMP_RATE_PER_HOUR;
-		System.out.println("Monthly Employee Wage: " + totalEmpWage);
+		System.out.println(String.format("Monthly Employee Wage for company %s is %d", company, totalEmpWage));
 		return totalEmpWage;
 	}
 
 	public static void main(String[] args) {
 		System.out.println("Employee Wage Builder");
 		System.out.println("----------------------");
-		computeEmpWage();
+		computeEmpWage("Capgemini", 20, 20, 20);
+		computeEmpWage("Bridgelabs", 10, 10, 20);
 	}
 }
