@@ -11,12 +11,14 @@ public class EmpWageBuilder {
 		final int IS_PART_TIME = 2;
 		int EMP_RATE_PER_HOUR = 20;
 		int NUM_OF_WORKING_DAYS = 20;
+		int MAX_HRS = 10;
 
 		Random rand = new Random();
-		int totalEmpWage = 0;
-		for (int day = 0; day <= NUM_OF_WORKING_DAYS; ++day) {
+		int totalEmpHrs = 0;
+		int dayCount = 0, empHrs = 0;
+		while (dayCount < NUM_OF_WORKING_DAYS && empHrs < MAX_HRS) {
+			dayCount++;
 			int empCheck = rand.nextInt(3);
-			int empHrs = 0;
 			switch (empCheck) {
 			case IS_FULL_TIME:
 				empHrs = 8;
@@ -25,10 +27,10 @@ public class EmpWageBuilder {
 				empHrs = 4;
 				break;
 			}
-			int dailyWage = empHrs * EMP_RATE_PER_HOUR;
-			totalEmpWage += dailyWage;
-			System.out.println("Employee Wage: "+dailyWage);
+			totalEmpHrs += empHrs;
+			System.out.println("Day#: " + dayCount + " Emp Hr: "+empHrs);
 		}
+		int totalEmpWage = totalEmpHrs * EMP_RATE_PER_HOUR;
 		System.out.println("Monthly Employee Wage: " + totalEmpWage);
 	}
 }
