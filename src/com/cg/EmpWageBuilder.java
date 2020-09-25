@@ -3,17 +3,26 @@ package com.cg;
 import java.util.Random;
 
 public class EmpWageBuilder {
-	static final int IS_FULL_TIME = 1;
-	static final int IS_PART_TIME = 2;
-	static int EMP_RATE_PER_HOUR = 20;
-	static int NUM_OF_WORKING_DAYS = 20;
-	static int MAX_HRS = 10;
+	public static final int IS_FULL_TIME = 1;
+	public static final int IS_PART_TIME = 2;
+	private int empRatePerHour;
+	private int numOfWorkingDays;
+	private int maxHours;
+	private int totalEmpWage;
+	private String company;
 
-	public static int computeEmpWage(String company, int EMP_RATE_PER_HOUR, int NUM_OF_WORKING_DAYS, int MAX_HRS) {
+	public EmpWageBuilder(String company, int empRatePerHour, int numOfWorkingDays, int maxHours) {
+		this.empRatePerHour = empRatePerHour;
+		this.numOfWorkingDays = numOfWorkingDays;
+		this.maxHours = maxHours;
+		this.company = company;
+	}
+
+	public int computeEmpWage() {
 		Random rand = new Random();
 		int totalEmpHrs = 0;
 		int dayCount = 0, empHrs = 0;
-		while (dayCount < NUM_OF_WORKING_DAYS && empHrs < MAX_HRS) {
+		while (dayCount < numOfWorkingDays && empHrs < maxHours) {
 			dayCount++;
 			int empCheck = rand.nextInt(3);
 			switch (empCheck) {
@@ -27,15 +36,22 @@ public class EmpWageBuilder {
 			totalEmpHrs += empHrs;
 			System.out.println("Day#: " + dayCount + " Emp Hr: " + empHrs);
 		}
-		int totalEmpWage = totalEmpHrs * EMP_RATE_PER_HOUR;
-		System.out.println(String.format("Monthly Employee Wage for company %s is %d", company, totalEmpWage));
+		totalEmpWage = totalEmpHrs * empRatePerHour;
 		return totalEmpWage;
+	}
+
+	public void print() {
+		System.out.println(String.format("Monthly Employee Wage for company %s is %d", company, totalEmpWage));
 	}
 
 	public static void main(String[] args) {
 		System.out.println("Employee Wage Builder");
 		System.out.println("----------------------");
-		computeEmpWage("Capgemini", 20, 20, 20);
-		computeEmpWage("Bridgelabs", 10, 10, 20);
+		EmpWageBuilder capgemini = new EmpWageBuilder("Capgemini", 20, 20, 20);
+		EmpWageBuilder bridgelabs = new EmpWageBuilder("Bridgelabs", 10, 10, 20);
+		capgemini.computeEmpWage();
+		capgemini.print();
+		bridgelabs.computeEmpWage();
+		bridgelabs.print();
 	}
 }
